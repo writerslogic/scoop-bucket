@@ -1,0 +1,46 @@
+name: Excavator
+
+on:
+  schedule:
+    - cron: '0 */6 * * *'  # Every 6 hours
+  workflow_dispatch:
+
+jobs:
+  excavate:
+    name: Update Manifests
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Scoop
+        uses: MinoruSekine/setup-scoop@v4.0.1
+
+      - name: Install Scoop-Checkver
+        run: |
+          scoop install main/git
+          scoop bucket add main
+
+      - name: Update manifests
+        run: |
+          # Run checkver to find outdated manifests
+          scoop checkver --all --update
+        continue-on-error: true
+
+      - name: Check for changes
+        id: changes
+        run: |
+          $changes = git status --porcelain
+          if ($changes) {
+            echo "has_changes=true" >> $env:GITHUB_OUTPUT
+          } else {
+            echo "has_changes=false" >> $env:GITHUB_OUTPUT
+          }
+
+      - name: Commit and push changes
+        if: steps.changes.outputs.has_changes == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "chore: auto-update manifests [skip ci]"
+          git push
