@@ -8,9 +8,10 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/writerslogic/witnessd"><img src="https://img.shields.io/badge/version-0.1.1-green" alt="Version"></a>
+  <a href="https://github.com/writerslogic/scoop-bucket/actions/workflows/ci.yml"><img src="https://github.com/writerslogic/scoop-bucket/actions/workflows/ci.yml/badge.svg" alt="Tests"></a>
+  <a href="https://github.com/writerslogic/scoop-bucket/actions/workflows/excavator.yml"><img src="https://github.com/writerslogic/scoop-bucket/actions/workflows/excavator.yml/badge.svg" alt="Excavator"></a>
+  <a href="https://github.com/writerslogic/witnessd/releases/latest"><img src="https://img.shields.io/github/v/release/writerslogic/witnessd?label=witnessd" alt="Version"></a>
   <a href="https://github.com/writerslogic/witnessd/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-PolyForm--Noncommercial-blue" alt="License"></a>
-  <a href="https://scoop.sh"><img src="https://img.shields.io/badge/scoop-bucket-yellow" alt="Scoop"></a>
 </p>
 
 ---

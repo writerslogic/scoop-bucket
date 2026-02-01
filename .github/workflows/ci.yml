@@ -1,0 +1,74 @@
+name: Tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    name: Validate Manifests
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Scoop
+        uses: MinoruSekine/setup-scoop@v4.0.1
+
+      - name: Install dependencies
+        run: |
+          scoop install main/git
+
+      - name: Validate JSON syntax
+        run: |
+          Get-ChildItem -Filter *.json | ForEach-Object {
+            Write-Host "Validating $($_.Name)..."
+            try {
+              $null = Get-Content $_.FullName | ConvertFrom-Json
+              Write-Host "  OK" -ForegroundColor Green
+            } catch {
+              Write-Host "  FAILED: $_" -ForegroundColor Red
+              exit 1
+            }
+          }
+
+      - name: Check manifest schema
+        run: |
+          Get-ChildItem -Filter *.json | ForEach-Object {
+            $manifest = Get-Content $_.FullName | ConvertFrom-Json
+            $errors = @()
+
+            # Required fields
+            if (-not $manifest.version) { $errors += "Missing 'version'" }
+            if (-not $manifest.description) { $errors += "Missing 'description'" }
+            if (-not $manifest.homepage) { $errors += "Missing 'homepage'" }
+            if (-not $manifest.license) { $errors += "Missing 'license'" }
+
+            # Must have architecture or direct url
+            if (-not $manifest.architecture -and -not $manifest.url) {
+              $errors += "Missing 'architecture' or 'url'"
+            }
+
+            # Must have bin
+            if (-not $manifest.bin) { $errors += "Missing 'bin'" }
+
+            if ($errors.Count -gt 0) {
+              Write-Host "$($_.Name): FAILED" -ForegroundColor Red
+              $errors | ForEach-Object { Write-Host "  - $_" -ForegroundColor Red }
+              exit 1
+            } else {
+              Write-Host "$($_.Name): OK" -ForegroundColor Green
+            }
+          }
+
+      - name: Check autoupdate configuration
+        run: |
+          Get-ChildItem -Filter *.json | ForEach-Object {
+            $manifest = Get-Content $_.FullName | ConvertFrom-Json
+            if ($manifest.autoupdate) {
+              Write-Host "$($_.Name): autoupdate configured" -ForegroundColor Green
+            } else {
+              Write-Host "$($_.Name): WARNING - no autoupdate configured" -ForegroundColor Yellow
+            }
+          }
