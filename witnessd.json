@@ -1,13 +1,13 @@
 {
     "$schema": "https://raw.githubusercontent.com/ScoopInstaller/Scoop/master/schema.json",
-    "version": "0.1.6",
+    "version": "0.1.7",
     "description": "Cryptographic authorship witnessing for writers and creators",
     "homepage": "https://writerslogic.com",
     "license": "PolyForm-Noncommercial-1.0.0",
     "architecture": {
         "64bit": {
-            "url": "https://github.com/writerslogic/witnessd/releases/download/v0.1.6/witnessd_v0.1.6_x86_64-pc-windows-msvc.zip",
-            "hash": "a3dd0475d1766e34a0f009b10de11e4b9b9fbc80afc97b082a16168874eaad02"
+            "url": "https://github.com/writerslogic/witnessd/releases/download/v0.1.7/witnessd_v0.1.7_x86_64-pc-windows-msvc.zip",
+            "hash": "0019dfc4b32d63c1392aa264aed2253c1e0c2fb09216f8e2cc269bbfb8bb49b5"
         }
     },
     "bin": [
