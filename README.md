@@ -11,7 +11,7 @@
   <a href="https://github.com/writerslogic/scoop-bucket/actions/workflows/ci.yml"><img src="https://github.com/writerslogic/scoop-bucket/actions/workflows/ci.yml/badge.svg" alt="Tests"></a>
   <a href="https://github.com/writerslogic/scoop-bucket/actions/workflows/excavator.yml"><img src="https://github.com/writerslogic/scoop-bucket/actions/workflows/excavator.yml/badge.svg" alt="Excavator"></a>
   <a href="https://github.com/writerslogic/witnessd/releases/latest"><img src="https://img.shields.io/github/v/release/writerslogic/witnessd?label=witnessd" alt="Version"></a>
-  <a href="https://github.com/writerslogic/witnessd/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-PolyForm--Noncommercial-blue" alt="License"></a>
+  <a href="https://github.com/writerslogic/witnessd/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-Apache--2.0-blue" alt="License"></a>
 </p>
 
 ---
@@ -101,4 +101,4 @@ All witnessd releases include:
 
 ## License
 
-witnessd is licensed under the [PolyForm Noncommercial License 1.0.0](https://github.com/writerslogic/witnessd/blob/main/LICENSE).
+witnessd is licensed under the [Apache License 2.0](https://github.com/writerslogic/witnessd/blob/main/LICENSE).

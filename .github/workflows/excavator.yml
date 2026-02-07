@@ -15,10 +15,15 @@ jobs:
       - name: Setup Scoop
         uses: MinoruSekine/setup-scoop@v4.0.1
 
-      - name: Install Scoop-Checkver
+      - name: Install dependencies
         run: |
           scoop install main/git
-          scoop bucket add main
+          # Add main bucket only if not already present
+          $buckets = scoop bucket list
+          if (-not ($buckets -match "^main")) {
+            scoop bucket add main
+          }
+        continue-on-error: true
 
       - name: Update manifests
         run: |
