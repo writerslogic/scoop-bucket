@@ -6,7 +6,7 @@
     "license": "Apache-2.0",
     "architecture": {
         "64bit": {
-            "url": "https://github.com/writerslogic/witnessd/releases/download/v0.1.9/witnessd_v0.1.9_x86_64-pc-windows-msvc.zip",
+            "url": "https://github.com/writerslogic/witnessd-cli/releases/download/v0.1.9/witnessd_v0.1.9_x86_64-pc-windows-msvc.zip",
             "hash": "cf9ba930ab249c63dbf8d621533c6260f9c4cc7ea6c2f9f0daa56d3ada1f8f4d"
         }
     },
@@ -15,12 +15,16 @@
         ["witnessd-cli.exe", "witnessd"]
     ],
     "checkver": {
-        "github": "https://github.com/writerslogic/witnessd"
+        "github": "https://github.com/writerslogic/witnessd-cli"
     },
     "autoupdate": {
         "architecture": {
             "64bit": {
-                "url": "https://github.com/writerslogic/witnessd/releases/download/v$version/witnessd_v$version_x86_64-pc-windows-msvc.zip"
+                "url": "https://github.com/writerslogic/witnessd-cli/releases/download/v$version/witnessd_v$version_x86_64-pc-windows-msvc.zip",
+                "hash": {
+                    "url": "https://github.com/writerslogic/witnessd-cli/releases/download/v$version/checksums.txt",
+                    "regex": "([a-f0-9]{64})\\s+witnessd_v$version_x86_64-pc-windows-msvc.zip"
+                }
             }
         }
     }
