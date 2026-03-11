@@ -1,19 +1,18 @@
 {
     "$schema": "https://raw.githubusercontent.com/ScoopInstaller/Scoop/master/schema.json",
-    "version": "0.1.9",
+    "version": "0.3.6",
     "description": "Cryptographic authorship witnessing for writers and creators",
     "homepage": "https://writerslogic.com",
     "license": "AGPL-3.0-only",
     "notes": "Run 'wld init' to get started. See https://writerslogic.com for documentation.",
     "architecture": {
         "64bit": {
-            "url": "https://github.com/writerslogic/witnessd-cli/releases/download/v0.1.9/witnessd_v0.1.9_x86_64-pc-windows-msvc.zip",
-            "hash": "cf9ba930ab249c63dbf8d621533c6260f9c4cc7ea6c2f9f0daa56d3ada1f8f4d"
+            "url": "https://github.com/writerslogic/witnessd/releases/download/v0.3.6/writerslogic-v0.3.6-x86_64-pc-windows-msvc.zip",
+            "hash": "fbffa9d6c1d2ff06a39bb12017c2347db099e3827eeb9cd9f571b0f998ea5e44"
         }
     },
     "bin": [
-        ["witnessd-cli.exe", "writerslogic"],
-        ["witnessd-cli.exe", "wld"]
+        "wld.exe"
     ],
     "checkver": {
         "github": "https://github.com/writerslogic/witnessd"
@@ -21,12 +20,11 @@
     "autoupdate": {
         "architecture": {
             "64bit": {
-                "url": "https://github.com/writerslogic/witnessd/releases/download/v$version/writerslogic_v$version_x86_64-pc-windows-msvc.zip",
-                "hash": {
-                    "url": "https://github.com/writerslogic/witnessd/releases/download/v$version/checksums.txt",
-                    "regex": "([a-f0-9]{64})\\s+writerslogic_v$version_x86_64-pc-windows-msvc.zip"
-                }
+                "url": "https://github.com/writerslogic/witnessd/releases/download/v$version/writerslogic-v$version-x86_64-pc-windows-msvc.zip"
             }
+        },
+        "hash": {
+            "url": "$url.sha256"
         }
     }
 }
