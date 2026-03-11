@@ -1,0 +1,62 @@
+name: Update Manifest
+
+on:
+  repository_dispatch:
+    types: [update-manifest]
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    name: Update Manifest
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Update manifest
+        env:
+          TAG: ${{ github.event.client_payload.tag }}
+          VERSION: ${{ github.event.client_payload.version }}
+          SHA256_WIN: ${{ github.event.client_payload.sha256_win }}
+        run: |
+          cat > writerslogic.json << EOF
+          {
+              "\$schema": "https://raw.githubusercontent.com/ScoopInstaller/Scoop/master/schema.json",
+              "version": "${VERSION}",
+              "description": "Cryptographic authorship witnessing for writers and creators",
+              "homepage": "https://writerslogic.com",
+              "license": "AGPL-3.0-only",
+              "notes": "Run 'wld init' to get started. See https://writerslogic.com for documentation.",
+              "architecture": {
+                  "64bit": {
+                      "url": "https://github.com/writerslogic/witnessd/releases/download/${TAG}/writerslogic-${TAG}-x86_64-pc-windows-msvc.zip",
+                      "hash": "${SHA256_WIN}"
+                  }
+              },
+              "bin": [
+                  "wld.exe"
+              ],
+              "checkver": {
+                  "github": "https://github.com/writerslogic/witnessd"
+              },
+              "autoupdate": {
+                  "architecture": {
+                      "64bit": {
+                          "url": "https://github.com/writerslogic/witnessd/releases/download/v\$version/writerslogic-v\$version-x86_64-pc-windows-msvc.zip"
+                      }
+                  },
+                  "hash": {
+                      "url": "\$url.sha256"
+                  }
+              }
+          }
+          EOF
+
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add writerslogic.json
+          git commit -m "chore: update writerslogic to ${{ github.event.client_payload.version }}"
+          git push
