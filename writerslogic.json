@@ -1,14 +1,14 @@
 {
     "$schema": "https://raw.githubusercontent.com/ScoopInstaller/Scoop/master/schema.json",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "description": "Cryptographic authorship witnessing for writers and creators",
     "homepage": "https://writerslogic.com",
     "license": "AGPL-3.0-only",
     "notes": "Run 'wld init' to get started. See https://writerslogic.com for documentation.",
     "architecture": {
         "64bit": {
-            "url": "https://github.com/writerslogic/witnessd/releases/download/v1.0.2/writerslogic-v1.0.2-x86_64-pc-windows-msvc.zip",
-            "hash": "25b3a08ea9f17ca92017bff2414d8211fedf6299e866bc7f58687fd7abefaa99"
+            "url": "https://github.com/writerslogic/witnessd/releases/download/v1.0.3/writerslogic-v1.0.3-x86_64-pc-windows-msvc.zip",
+            "hash": "fdf2efd128f05f31dbb58e6dfb0d9ccc0028536072dbd23d23cbf71dff2c4a5c"
         }
     },
     "bin": [
