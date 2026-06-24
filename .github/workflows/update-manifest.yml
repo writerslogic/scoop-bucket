@@ -27,23 +27,23 @@ jobs:
               "description": "Cryptographic authorship witnessing for writers and creators",
               "homepage": "https://writerslogic.com",
               "license": "AGPL-3.0-only",
-              "notes": "Run 'wld init' to get started. See https://writerslogic.com for documentation.",
+              "notes": "Run 'writersproof-cli init' to get started. See https://writerslogic.com for documentation.",
               "architecture": {
                   "64bit": {
-                      "url": "https://github.com/writerslogic/witnessd/releases/download/${TAG}/writerslogic-${TAG}-x86_64-pc-windows-msvc.zip",
+                      "url": "https://github.com/writerslogic/writersproof-cli/releases/download/${TAG}/writersproof-cli-${TAG}-x86_64-pc-windows-msvc.zip",
                       "hash": "${SHA256_WIN}"
                   }
               },
               "bin": [
-                  "wld.exe"
+                  "writersproof-cli.exe"
               ],
               "checkver": {
-                  "github": "https://github.com/writerslogic/witnessd"
+                  "github": "https://github.com/writerslogic/writersproof-cli"
               },
               "autoupdate": {
                   "architecture": {
                       "64bit": {
-                          "url": "https://github.com/writerslogic/witnessd/releases/download/v\$version/writerslogic-v\$version-x86_64-pc-windows-msvc.zip"
+                          "url": "https://github.com/writerslogic/writersproof-cli/releases/download/v\$version/writersproof-cli-v\$version-x86_64-pc-windows-msvc.zip"
                       }
                   },
                   "hash": {
