@@ -30,7 +30,7 @@ jobs:
               "notes": "Run 'writersproof-cli init' to get started. See https://writerslogic.com for documentation.",
               "architecture": {
                   "64bit": {
-                      "url": "https://github.com/writerslogic/writersproof-cli/releases/download/${TAG}/writersproof-cli-${TAG}-x86_64-pc-windows-msvc.zip",
+                      "url": "https://updates.writerslogic.com/cli/writersproof-cli-${TAG}-x86_64-pc-windows-msvc.zip",
                       "hash": "${SHA256_WIN}"
                   }
               },
@@ -43,7 +43,7 @@ jobs:
               "autoupdate": {
                   "architecture": {
                       "64bit": {
-                          "url": "https://github.com/writerslogic/writersproof-cli/releases/download/v\$version/writersproof-cli-v\$version-x86_64-pc-windows-msvc.zip"
+                          "url": "https://updates.writerslogic.com/cli/writersproof-cli-v\$version-x86_64-pc-windows-msvc.zip"
                       }
                   },
                   "hash": {
