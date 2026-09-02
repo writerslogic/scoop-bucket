@@ -1,29 +1,14 @@
-<p align="center">
-  <strong>Scoop Bucket for WritersProof</strong><br>
-  <em>Cryptographic authorship witnessing for writers and creators</em>
-</p>
+<!-- repo-header:start -->
+<img src="https://github.com/writerslogic.png?size=160" alt="Add the bucket logo" width="120" align="left">
 
-<p align="center">
-  <a href="https://github.com/writerslogic/scoop-bucket/actions/workflows/ci.yml"><img src="https://github.com/writerslogic/scoop-bucket/actions/workflows/ci.yml/badge.svg" alt="Tests"></a>
-  <a href="https://github.com/writerslogic/scoop-bucket/actions/workflows/excavator.yml"><img src="https://github.com/writerslogic/scoop-bucket/actions/workflows/excavator.yml/badge.svg" alt="Excavator"></a>
-</p>
+<h1>Add the bucket</h1>
 
----
+<p><strong>Scoop bucket for CPoE (Windows)</strong></p>
 
-## What is WritersProof?
+<br clear="left">
 
-**WritersProof** creates tamper-evident cryptographic records of document authorship. It provides irrefutable proof that you wrote what you wrote, when you wrote it.
-
-- **Prove authorship** — Cryptographic evidence chain linking you to your work
-- **Detect AI content** — Forensic analysis identifies non-human writing patterns
-- **Hardware-backed** — TPM 2.0 integration for device binding
-- **Verify independently** — Evidence can be verified by anyone, anywhere
-
-## Installation
-
-```powershell
-# Add the bucket
-scoop bucket add writerslogic https://github.com/writerslogic/scoop-bucket
+[![CI](https://img.shields.io/github/actions/workflow/status/writerslogic/scoop-bucket/excavator.yml?style=flat-square&labelColor=20232a&branch=main&label=CI)](https://github.com/writerslogic/scoop-bucket/actions/workflows/excavator.yml) [![Best Practices Evidence](https://img.shields.io/badge/best%20practices-evidence%20reviewed-6a4c93?style=flat-square&labelColor=20232a)](.bestpractices.json) [![GitHub Sponsors](https://img.shields.io/badge/GitHub%20Sponsors-Sponsor-EA4AAA?style=flat-square&labelColor=20232a)](https://github.com/sponsors/dcondrey)
+<!-- repo-header:end -->
 
 # Install the WritersProof CLI
 scoop install writerslogic
