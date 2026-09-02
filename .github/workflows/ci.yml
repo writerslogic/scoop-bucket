@@ -22,7 +22,7 @@ jobs:
 
       - name: Validate JSON syntax
         run: |
-          Get-ChildItem -Filter *.json | ForEach-Object {
+          Get-ChildItem -Filter *.json | Where-Object { $_.Name -notlike '.*' } | ForEach-Object {
             Write-Host "Validating $($_.Name)..."
             try {
               $null = Get-Content $_.FullName | ConvertFrom-Json
@@ -35,7 +35,7 @@ jobs:
 
       - name: Check manifest schema
         run: |
-          Get-ChildItem -Filter *.json | ForEach-Object {
+          Get-ChildItem -Filter *.json | Where-Object { $_.Name -notlike '.*' } | ForEach-Object {
             $manifest = Get-Content $_.FullName | ConvertFrom-Json
             $errors = @()
 
@@ -64,7 +64,7 @@ jobs:
 
       - name: Check autoupdate configuration
         run: |
-          Get-ChildItem -Filter *.json | ForEach-Object {
+          Get-ChildItem -Filter *.json | Where-Object { $_.Name -notlike '.*' } | ForEach-Object {
             $manifest = Get-Content $_.FullName | ConvertFrom-Json
             if ($manifest.autoupdate) {
               Write-Host "$($_.Name): autoupdate configured" -ForegroundColor Green
