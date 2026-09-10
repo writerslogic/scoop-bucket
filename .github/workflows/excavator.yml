@@ -5,6 +5,15 @@ on:
     - cron: '0 */6 * * *'  # Every 6 hours
   workflow_dispatch:
 
+# REQUIRED: without this the job gets the repo's default (read-only) token and
+# every run's "Commit and push changes" step 403s after `scoop checkver`
+# already did the work — verified live (run 34425613735): the update commits
+# fine locally, then `git push` fails with "Permission ... denied to
+# github-actions[bot]". update-formula.yml and update-cask.yml in the
+# sibling homebrew-tap repo already declare this; this workflow just never did.
+permissions:
+  contents: write
+
 jobs:
   excavate:
     name: Update Manifests
@@ -46,6 +55,16 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add -A
+          # Only the manifest scoop's own checkver/autoupdate can have changed.
+          # `git add -A` previously swept up install.ps1, an unrelated artifact
+          # the scoop setup action drops in the checkout root, and committed it
+          # to this repo (verified live, run 34425613735: "1 file changed, 787
+          # insertions", the file being install.ps1, not the manifest).
+          git add writerslogic.json
+          $staged = git diff --cached --name-only
+          if (-not $staged) {
+            Write-Output "No manifest changes"
+            exit 0
+          }
           git commit -m "chore: auto-update manifests [skip ci]"
           git push
