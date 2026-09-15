@@ -19,7 +19,14 @@ jobs:
           TAG: ${{ github.event.client_payload.tag }}
           VERSION: ${{ github.event.client_payload.version }}
           SHA256_WIN: ${{ github.event.client_payload.sha256_win }}
+          SHA256_WIN_ARM: ${{ github.event.client_payload.sha256_win_arm }}
         run: |
+          set -euo pipefail
+          [[ "$VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+(-[0-9A-Za-z.]+)?$ && "$TAG" = "v$VERSION" ]] \
+            || { echo "::error::invalid release version/tag"; exit 1; }
+          for HASH in "$SHA256_WIN" "$SHA256_WIN_ARM"; do
+            [[ "$HASH" =~ ^[a-f0-9]{64}$ ]] || { echo "::error::both Windows hashes are required"; exit 1; }
+          done
           cat > writerslogic.json << EOF
           {
               "\$schema": "https://raw.githubusercontent.com/ScoopInstaller/Scoop/master/schema.json",
@@ -32,6 +39,10 @@ jobs:
                   "64bit": {
                       "url": "https://updates.writerslogic.com/cli/writersproof-cli-${TAG}-x86_64-pc-windows-msvc.zip",
                       "hash": "${SHA256_WIN}"
+                  },
+                  "arm64": {
+                      "url": "https://updates.writerslogic.com/cli/writersproof-cli-${TAG}-aarch64-pc-windows-msvc.zip",
+                      "hash": "${SHA256_WIN_ARM}"
                   }
               },
               "bin": [
@@ -45,6 +56,9 @@ jobs:
                   "architecture": {
                       "64bit": {
                           "url": "https://updates.writerslogic.com/cli/writersproof-cli-v\$version-x86_64-pc-windows-msvc.zip"
+                      },
+                      "arm64": {
+                          "url": "https://updates.writerslogic.com/cli/writersproof-cli-v\$version-aarch64-pc-windows-msvc.zip"
                       }
                   }
               }
@@ -52,9 +66,12 @@ jobs:
           EOF
 
       - name: Commit and push
+        env:
+          VERSION: ${{ github.event.client_payload.version }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add writerslogic.json
-          git commit -m "chore: update writerslogic to ${{ github.event.client_payload.version }}"
+          git diff --cached --quiet && echo "No changes" && exit 0
+          git commit -m "chore: update writerslogic to $VERSION"
           git push
